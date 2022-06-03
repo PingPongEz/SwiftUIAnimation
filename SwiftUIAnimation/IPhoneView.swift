@@ -9,40 +9,54 @@ import SwiftUI
 
 struct IPhoneViewBorder: View {
     
-    @Binding var animateButton: Bool
     @Binding var isScreenOn: Bool
     @Binding var degress: Double
+    
+    @Binding var offsetDiff: Double
     
     var body: some View {
         GeometryReader { geo in
             let width = geo.size.width * 0.96
             let height = geo.size.height * 0.96
             ZStack {
+                Loadings(maxWeight: width, maxHeight: height, source: degress)
+                    .foregroundColor(.red)
                 IPhoneBorder(maxWeight: width, maxHeight: height)
                     .foregroundColor(.greenLish)
-                Loadings(maxWeight: width, maxHeight: height, source: degress).stroke(lineWidth: 4)
-                ButtonView(
+                IPhoneButtonView(
                     width: width,
                     height: height,
-                    offsetX: self.animateButton ? width - width * 0.008 : width,
-                    offsetY: height
+                    offsetX: width,
+                    offsetY: height,
+                    offsetDiff: $offsetDiff
                 )
                 .onTapGesture {
-                    animate()
-                    animateButton.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        animateButton.toggle()
-                    }
-                    isScreenOn.toggle()
+                    animate(width: width)
                 }
-                .foregroundColor(.greenLish)
+                .offset(CGSize(width: offsetDiff, height: 0))
             }
         }
     }
     
-    func animate() {
-        withAnimation(Animation.easeInOut(duration: 2)) {
-            self.degress = 360
+    func animate(width: Double) {
+        withAnimation(.linear(duration: 0.1)) {
+            offsetDiff -= width * 0.009
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 0.11, repeats: false) { _ in
+            withAnimation(.linear(duration: 0.1)) {
+                offsetDiff += width * 0.009
+            }
+        }
+        
+        if !isScreenOn {
+            Timer.scheduledTimer(withTimeInterval: 0.44, repeats: false) { _ in
+                withAnimation(.linear(duration: 0.1)) {
+                    isScreenOn.toggle()
+                }
+            }
+        } else {
+            isScreenOn.toggle()
         }
     }
 }
@@ -58,9 +72,18 @@ struct IPhoneViewScreen: View {
 }
 
 struct IPhoneButtonView: View {
+    
+    let width: Double
+    let height: Double
+    let offsetX: Double
+    let offsetY: Double
+    
+    @Binding var offsetDiff: Double
+    
     var body: some View {
-        ButtonView(width: 15, height: 60, offsetX: 0, offsetY: 0)
+        ButtonView(width: width, height: height, offsetX: width, offsetY: height, offsetDiff: offsetDiff)
     }
+    
 }
 
 
@@ -121,7 +144,7 @@ struct Loadings: Shape {
             radius: maxWeight / 6,
             startAngle: Angle(degrees: 0),
             endAngle: Angle(degrees: source),
-            clockwise: false
+            clockwise: true
         )
         
         return path
@@ -205,7 +228,6 @@ struct IPhoneScreen: Shape {
             control: CGPoint(x: minWeight, y: maxHeight)
         )
         
-        
         return path
     }
 }
@@ -216,6 +238,8 @@ struct ButtonView: Shape {
     let height: Double
     let offsetX: Double
     let offsetY: Double
+    
+    var offsetDiff: Double
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -231,6 +255,8 @@ struct ButtonView: Shape {
         
         return path
     }
+    
+    
 }
 
 extension Color {
@@ -242,6 +268,6 @@ extension Color {
 
 struct TestAnimation1_Previews: PreviewProvider {
     static var previews: some View {
-        IPhoneViewBorder(animateButton: .constant(false), isScreenOn: .constant(false), degress: .constant(0.0))
+        IPhoneViewBorder(isScreenOn: .constant(false), degress: .constant(0.0), offsetDiff: .constant(0.0))
     }
 }

@@ -14,10 +14,11 @@ struct MainView: View {
     @State private var screenWidth = UIScreen.main.bounds.width
     @State private var screenHeight = UIScreen.main.bounds.height
     @State private var degress = 0.0
+    @State private var offset = 0.0
     
     var body: some View {
         ZStack {
-            IPhoneViewBorder(animateButton: $animateButton, isScreenOn: $isScreenOn, degress: $degress)
+            IPhoneViewBorder(isScreenOn: $isScreenOn, degress: $degress, offsetDiff: $offset)
                 .frame(width: screenWidth * 0.5, height: screenHeight * 0.5)
                 .foregroundColor(.greenLish)
             IPhoneViewScreen()
@@ -27,6 +28,7 @@ struct MainView: View {
                     .linear(duration: isScreenOn ? 0.2 : 0),
                     value: isScreenOn
                 )
+            
         }
     }
 }
