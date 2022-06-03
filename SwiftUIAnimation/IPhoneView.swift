@@ -13,14 +13,13 @@ struct IPhoneViewBorder: View {
     @Binding var degress: Double
     
     @Binding var offsetDiff: Double
+    @Binding var zeroDegress: Double
     
     var body: some View {
         GeometryReader { geo in
             let width = geo.size.width * 0.96
             let height = geo.size.height * 0.96
             ZStack {
-                Loadings(maxWeight: width, maxHeight: height, source: degress)
-                    .foregroundColor(.red)
                 IPhoneBorder(maxWeight: width, maxHeight: height)
                     .foregroundColor(.greenLish)
                 IPhoneButtonView(
@@ -55,18 +54,79 @@ struct IPhoneViewBorder: View {
                     isScreenOn.toggle()
                 }
             }
+            
+            Timer.scheduledTimer(withTimeInterval: 2.1, repeats: true) { _ in
+                withAnimation(Animation.easeInOut(duration: 1)) {
+                    degress += 360 * 0.63
+                    withAnimation(Animation.linear(duration: 2)) {
+                        degress += 360 * 0.3
+                    }
+                }
+                
+                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+                    withAnimation(Animation.easeInOut(duration: 1.5)) {
+                        zeroDegress = degress - 60
+                        withAnimation(Animation.linear(duration: 2)) {
+                            zeroDegress = degress
+                        }
+                    }
+                    
+                }
+            }
         } else {
             isScreenOn.toggle()
         }
     }
 }
 
+struct Loadings: Shape {
+    
+    let maxWeight: Double
+    let maxHeight: Double
+    
+    var startAngle: Double
+    var endAngle: Double
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.addArc(
+            center: CGPoint(x: maxWeight / 2, y: maxHeight / 2),
+            radius: maxWeight / 6,
+            startAngle: Angle(degrees: startAngle),
+            endAngle: Angle(degrees: endAngle),
+            clockwise: false
+        )
+        
+        return path
+    }
+    
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+            AnimatablePair(Double(startAngle), Double(endAngle))
+        } set {
+            startAngle = newValue.first
+            endAngle = newValue.second
+        }
+    }
+}
+
 struct IPhoneViewScreen: View {
+    
+    @Binding var isScreenOn: Bool
+    @Binding var degress: Double
+    @Binding var zeroDegress: Double
+    
     var body: some View {
         GeometryReader { geo in
-            let width = geo.size.width * 0.96
-            let height = geo.size.height * 0.96
-            IPhoneScreen(maxWeight: width, maxHeight: height)
+            ZStack {
+                let width = geo.size.width * 0.96
+                let height = geo.size.height * 0.96
+                IPhoneScreen(maxWeight: width, maxHeight: height)
+                
+                Loadings(maxWeight: width, maxHeight: height, startAngle: zeroDegress, endAngle: degress).stroke(lineWidth: 4)
+                    .foregroundColor(.red)
+            }
         }
     }
 }
@@ -123,28 +183,6 @@ struct IPhoneBorder: Shape {
         path.addQuadCurve(
             to: CGPoint(x: minWeight, y: maxHeight - diff),
             control: CGPoint(x: minWeight, y: maxHeight)
-        )
-        
-        return path
-    }
-}
-
-struct Loadings: Shape {
-    
-    let maxWeight: Double
-    let maxHeight: Double
-    
-    let source: Double
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        path.addArc(
-            center: CGPoint(x: maxWeight / 2, y: maxHeight / 2),
-            radius: maxWeight / 6,
-            startAngle: Angle(degrees: 0),
-            endAngle: Angle(degrees: source),
-            clockwise: true
         )
         
         return path
@@ -268,6 +306,6 @@ extension Color {
 
 struct TestAnimation1_Previews: PreviewProvider {
     static var previews: some View {
-        IPhoneViewBorder(isScreenOn: .constant(false), degress: .constant(0.0), offsetDiff: .constant(0.0))
+        IPhoneViewBorder(isScreenOn: .constant(false), degress: .constant(0.0), offsetDiff: .constant(0.0), zeroDegress: .constant(0.0))
     }
 }
