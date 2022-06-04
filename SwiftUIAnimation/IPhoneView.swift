@@ -15,6 +15,7 @@ struct IPhoneViewScreen: View {
     @Binding var isScreenOn: Bool
     @Binding var degress: Double
     @Binding var zeroDegress: Double
+    @State private var oppasity: Double = 0
     
     var body: some View {
         GeometryReader { geo in
@@ -24,8 +25,20 @@ struct IPhoneViewScreen: View {
             ZStack {
                 IPhoneScreen(maxWeight: width, maxHeight: height)
                 
-                Loadings(maxWeight: width, maxHeight: height, startAngle: degress, endAngle: zeroDegress).stroke(lineWidth: 4)
+                Loadings(maxWeight: width, maxHeight: height, startAngle: degress, endAngle: zeroDegress).stroke(lineWidth: 3)
                     .foregroundColor(.red)
+                    .opacity(oppasity)
+                    .onChange(of: isScreenOn) { newValue in //Плавность ползунка
+                        if isScreenOn {
+                            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+                                withAnimation(.linear(duration: 0.5)) {
+                                    oppasity = 1
+                                }
+                            }
+                        } else {
+                            oppasity = 0
+                        }
+                    }
             }
         }
     }
