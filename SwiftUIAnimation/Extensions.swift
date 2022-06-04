@@ -13,3 +13,7 @@ extension Color {
     static let whiteLish = Color(red: 208/255, green: 208/255, blue: 208/255)
     static let blackLish = Color(red: 30/255, green: 32/255, blue: 36/255)
 }
+
+extension View {
+    
+}

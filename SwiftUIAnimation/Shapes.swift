@@ -163,7 +163,8 @@ struct IPhoneScreen: Shape {
     }
 }
 
-struct ButtonView: Shape {
+struct Button: Shape, Identifiable {
+    var id = UUID()
     
     let width: Double
     let height: Double
