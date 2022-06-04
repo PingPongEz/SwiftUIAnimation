@@ -23,7 +23,7 @@ struct MainView: View {
                 .frame(width: screenWidth * 0.9, height: screenHeight * 0.9)
                 .foregroundColor(.greenLish)
             IPhoneViewScreen(isScreenOn: $isScreenOn, degress: $degress, zeroDegress: $zeroDegress)
-                .frame(width: screenWidth * 0.88, height: screenHeight * 0.89)
+                .frame(width: screenWidth * 0.86, height: screenHeight * 0.88)
                 .foregroundColor(isScreenOn ? .blackLish : .black)
                 .animation(
                     .linear(duration: isScreenOn ? 0.15 : 0),

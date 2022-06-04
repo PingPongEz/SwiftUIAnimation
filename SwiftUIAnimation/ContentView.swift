@@ -45,7 +45,6 @@ struct ContentView: View {
                 .scaleEffect(minimal / 100)
                 .offset(x: -middle / 3.75)
         }
-        
     }
 }
 

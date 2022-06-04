@@ -6,6 +6,42 @@
 //
 
 import SwiftUI
+import Combine
+
+class Tmer: ObservableObject {
+    
+    @Published var degress: Double = 360
+    @Published var zeroDegress: Double = 360
+    
+    var timer: AnyCancellable?
+    
+    init() {
+        setUpTimer()
+    }
+    
+    func setUpTimer() {
+        timer = Timer
+            .publish(every: 2.1, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                withAnimation(Animation.easeInOut(duration: 1)) {
+                    self.degress += 360 * 0.63
+                    withAnimation(Animation.linear(duration: 2)) {
+                        self.degress += 360 * 0.3
+                    }
+                }
+                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+                    withAnimation(Animation.easeInOut(duration: 1.5)) {
+                        self.zeroDegress = self.degress - 60
+                        withAnimation(Animation.linear(duration: 2.1)) {
+                            self.zeroDegress = self.degress
+                        }
+                    }
+                }
+            }
+    }
+}
 
 struct IPhoneViewBorder: View {
     
@@ -14,6 +50,28 @@ struct IPhoneViewBorder: View {
     
     @Binding var offsetDiff: Double
     @Binding var zeroDegress: Double
+    
+    @StateObject var timer: Tmer
+    
+//    var timer: Timer {
+//        return Timer.scheduledTimer(withTimeInterval: 2.1, repeats: true) { _ in
+//            withAnimation(Animation.easeInOut(duration: 1)) {
+//                degress += 360 * 0.63
+//                withAnimation(Animation.linear(duration: 2)) {
+//                    degress += 360 * 0.3
+//                }
+//            }
+//
+//            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+//                withAnimation(Animation.easeInOut(duration: 1.5)) {
+//                    zeroDegress = degress - 60
+//                    withAnimation(Animation.linear(duration: 2.1)) {
+//                        zeroDegress = degress
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     var body: some View {
         GeometryReader { geo in
@@ -38,6 +96,7 @@ struct IPhoneViewBorder: View {
     }
     
     func animate(width: Double) {
+        
         withAnimation(.linear(duration: 0.1)) {
             offsetDiff -= width * 0.009
         }
@@ -55,25 +114,13 @@ struct IPhoneViewBorder: View {
                 }
             }
             
-            Timer.scheduledTimer(withTimeInterval: 2.1, repeats: true) { _ in
-                withAnimation(Animation.easeInOut(duration: 1)) {
-                    degress += 360 * 0.63
-                    withAnimation(Animation.linear(duration: 2)) {
-                        degress += 360 * 0.3
-                    }
-                }
-                
-                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-                    withAnimation(Animation.easeInOut(duration: 1.5)) {
-                        zeroDegress = degress - 60
-                        withAnimation(Animation.linear(duration: 2)) {
-                            zeroDegress = degress
-                        }
-                    }
-                    
-                }
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                timer.fire()
             }
+            
         } else {
+            zeroDegress = 0.0
+            degress = 0.0
             isScreenOn.toggle()
         }
     }
