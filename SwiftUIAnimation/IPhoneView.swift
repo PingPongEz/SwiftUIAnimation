@@ -15,16 +15,16 @@ class Tmer: ObservableObject {
     
     var timer: AnyCancellable?
     
-    init() {
-        setUpTimer()
+    var secondTimer: Timer?
+    
+    func startTimer() {
+        secondTimer = Timer.scheduledTimer(withTimeInterval: <#T##TimeInterval#>, repeats: <#T##Bool#>, block: <#T##(Timer) -> Void#>)
     }
     
     func setUpTimer() {
         timer = Timer
             .publish(every: 2.1, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                guard let self = self else { return }
+            .sink { _ in
                 withAnimation(Animation.easeInOut(duration: 1)) {
                     self.degress += 360 * 0.63
                     withAnimation(Animation.linear(duration: 2)) {
@@ -41,6 +41,10 @@ class Tmer: ObservableObject {
                 }
             }
     }
+    
+    func stopTimer() {
+        timer?.cancel()
+    }
 }
 
 struct IPhoneViewBorder: View {
@@ -51,27 +55,7 @@ struct IPhoneViewBorder: View {
     @Binding var offsetDiff: Double
     @Binding var zeroDegress: Double
     
-    @StateObject var timer: Tmer
-    
-//    var timer: Timer {
-//        return Timer.scheduledTimer(withTimeInterval: 2.1, repeats: true) { _ in
-//            withAnimation(Animation.easeInOut(duration: 1)) {
-//                degress += 360 * 0.63
-//                withAnimation(Animation.linear(duration: 2)) {
-//                    degress += 360 * 0.3
-//                }
-//            }
-//
-//            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-//                withAnimation(Animation.easeInOut(duration: 1.5)) {
-//                    zeroDegress = degress - 60
-//                    withAnimation(Animation.linear(duration: 2.1)) {
-//                        zeroDegress = degress
-//                    }
-//                }
-//            }
-//        }
-//    }
+    @StateObject var timer = Tmer()
     
     var body: some View {
         GeometryReader { geo in
@@ -115,12 +99,13 @@ struct IPhoneViewBorder: View {
             }
             
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                timer.fire()
+                timer.setUpTimer()
+                print(timer.zeroDegress)
             }
-            
         } else {
-            zeroDegress = 0.0
-            degress = 0.0
+            timer.stopTimer()
+//            zeroDegress = 0.0
+//            degress = 0.0
             isScreenOn.toggle()
         }
     }
@@ -160,9 +145,11 @@ struct Loadings: Shape {
 
 struct IPhoneViewScreen: View {
     
+    @StateObject var timer = Tmer()
+    
     @Binding var isScreenOn: Bool
-    @Binding var degress: Double
-    @Binding var zeroDegress: Double
+//    @Binding var degress: Double
+//    @Binding var zeroDegress: Double
     
     var body: some View {
         GeometryReader { geo in
@@ -171,7 +158,7 @@ struct IPhoneViewScreen: View {
                 let height = geo.size.height * 0.96
                 IPhoneScreen(maxWeight: width, maxHeight: height)
                 
-                Loadings(maxWeight: width, maxHeight: height, startAngle: zeroDegress, endAngle: degress).stroke(lineWidth: 4)
+                Loadings(maxWeight: width, maxHeight: height, startAngle: timer.zeroDegress, endAngle: timer.zeroDegress).stroke(lineWidth: 4)
                     .foregroundColor(.red)
             }
         }

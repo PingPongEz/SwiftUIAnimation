@@ -22,7 +22,7 @@ struct MainView: View {
             IPhoneViewBorder(isScreenOn: $isScreenOn, degress: $degress, offsetDiff: $offset, zeroDegress: $zeroDegress)
                 .frame(width: screenWidth * 0.9, height: screenHeight * 0.9)
                 .foregroundColor(.greenLish)
-            IPhoneViewScreen(isScreenOn: $isScreenOn, degress: $degress, zeroDegress: $zeroDegress)
+            IPhoneViewScreen(isScreenOn: $isScreenOn)
                 .frame(width: screenWidth * 0.86, height: screenHeight * 0.88)
                 .foregroundColor(isScreenOn ? .blackLish : .black)
                 .animation(
