@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 
-
+//Первые попыточки получилось некрасиво и нереюзабельно
 struct IPhoneViewScreen: View {
     
     @Binding var isScreenOn: Bool
@@ -44,6 +44,7 @@ struct IPhoneViewScreen: View {
     }
 }
 
+//Первые попыточки получилось некрасиво и нереюзабельно
 struct IPhoneViewCircles: View {
     
     @Binding var currentCircle: Int
@@ -65,6 +66,7 @@ struct IPhoneViewCircles: View {
     
 }
 
+//Первые попыточки получилось некрасиво и нереюзабельно
 struct IPhoneButtonView: View {
     
     let width: Double
@@ -75,10 +77,11 @@ struct IPhoneButtonView: View {
     @Binding var offsetDiff: Double
     
     var body: some View {
-        Button(width: width, height: height, offsetX: width, offsetY: height, offsetDiff: offsetDiff)
+        Button(width: width, height: height, offsetX: width, offsetY: height, animatableData: offsetDiff)
     }
 }
 
+//Первые попыточки получилось некрасиво и нереюзабельно
 struct IPhoneButtonViewCircle: View {
     
     let width: Double
@@ -89,7 +92,7 @@ struct IPhoneButtonViewCircle: View {
     @Binding var offsetDiff: Double
     
     var body: some View {
-        Button(width: width, height: height, offsetX: width, offsetY: height, offsetDiff: offsetDiff)
+        Button(width: width, height: height, offsetX: width, offsetY: height, animatableData: offsetDiff)
     }
 }
 

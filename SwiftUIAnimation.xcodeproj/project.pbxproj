@@ -13,6 +13,7 @@
 		09EF9530284B978A00262D82 /* BouncingCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF952F284B978A00262D82 /* BouncingCircles.swift */; };
 		09EF9532284B9E3800262D82 /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF9531284B9E3800262D82 /* Screens.swift */; };
 		09EF9534284BAB8400262D82 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF9533284BAB8400262D82 /* Modifiers.swift */; };
+		09EF9536284D285300262D82 /* NewMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF9535284D285300262D82 /* NewMainView.swift */; };
 		09FEBE29284673E900A8D47D /* SwiftUIAnimationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FEBE28284673E900A8D47D /* SwiftUIAnimationApp.swift */; };
 		09FEBE2B284673E900A8D47D /* FirstPathShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FEBE2A284673E900A8D47D /* FirstPathShape.swift */; };
 		09FEBE2D284673EB00A8D47D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09FEBE2C284673EB00A8D47D /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		09EF952F284B978A00262D82 /* BouncingCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncingCircles.swift; sourceTree = "<group>"; };
 		09EF9531284B9E3800262D82 /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
 		09EF9533284BAB8400262D82 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		09EF9535284D285300262D82 /* NewMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMainView.swift; sourceTree = "<group>"; };
 		09FEBE25284673E900A8D47D /* SwiftUIAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09FEBE28284673E900A8D47D /* SwiftUIAnimationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAnimationApp.swift; sourceTree = "<group>"; };
 		09FEBE2A284673E900A8D47D /* FirstPathShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPathShape.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				09FEBE28284673E900A8D47D /* SwiftUIAnimationApp.swift */,
 				09FEBE3D2847505500A8D47D /* IPhoneView.swift */,
 				09EF952B284B722000262D82 /* Shapes.swift */,
+				09EF9535284D285300262D82 /* NewMainView.swift */,
 				09EF95292848CDF600262D82 /* MainView.swift */,
 				09EF9531284B9E3800262D82 /* Screens.swift */,
 				09EF952F284B978A00262D82 /* BouncingCircles.swift */,
@@ -172,6 +175,7 @@
 				09EF9530284B978A00262D82 /* BouncingCircles.swift in Sources */,
 				09EF952A2848CDF600262D82 /* MainView.swift in Sources */,
 				09EF9534284BAB8400262D82 /* Modifiers.swift in Sources */,
+				09EF9536284D285300262D82 /* NewMainView.swift in Sources */,
 				09FEBE3C28468BB200A8D47D /* CarView.swift in Sources */,
 				09EF952C284B722000262D82 /* Shapes.swift in Sources */,
 				09FEBE3E2847505500A8D47D /* IPhoneView.swift in Sources */,

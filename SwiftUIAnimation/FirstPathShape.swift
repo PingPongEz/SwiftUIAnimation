@@ -8,6 +8,9 @@
 import SwiftUI
 import CoreData
 
+
+//А тут просто дорога на которой потом будет ехать машинка 
+
 struct FirstPathShape: View {
     
     var body: some View {

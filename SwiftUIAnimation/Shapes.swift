@@ -86,6 +86,15 @@ struct IPhoneScreen: Shape {
     
     let maxWeight: Double
     let maxHeight: Double
+    
+    var calculatedWidth: Double {
+        maxWeight * 0.96
+    }
+    
+    var calculatedHeight: Double {
+        maxHeight * 0.96
+    }
+    
     let minWeight: Double = 0
     let minHeight: Double = 0
     
@@ -130,33 +139,33 @@ struct IPhoneScreen: Shape {
         )
         
         path.addLine(
-            to: CGPoint(x: maxWeight - diff - window - smallCorner, y: minHeight + diff)
+            to: CGPoint(x: calculatedWidth - diff - window - smallCorner, y: minHeight + diff)
         )
         path.addQuadCurve(
-            to: CGPoint(x: maxWeight - window - smallCorner, y: minHeight + smallCorner),
-            control: CGPoint(x: maxWeight - window - smallCorner, y: minHeight + diff)
+            to: CGPoint(x: calculatedWidth - window - smallCorner, y: minHeight + smallCorner),
+            control: CGPoint(x: calculatedWidth - window - smallCorner, y: minHeight + diff)
         )
         path.addQuadCurve(
-            to: CGPoint(x: maxWeight - window, y: minWeight),
-            control: CGPoint(x: maxWeight - window - smallCorner, y: minWeight)
-        )
-        
-        path.addLine(to: CGPoint(x: maxWeight - diff, y: minHeight))
-        path.addQuadCurve(
-            to: CGPoint(x: maxWeight, y: minHeight + diff),
-            control: CGPoint(x: maxWeight, y: minHeight)
+            to: CGPoint(x: calculatedWidth - window, y: minWeight),
+            control: CGPoint(x: calculatedWidth - window - smallCorner, y: minWeight)
         )
         
-        path.addLine(to: CGPoint(x: maxWeight, y: maxHeight - diff))
+        path.addLine(to: CGPoint(x: calculatedWidth - diff, y: minHeight))
         path.addQuadCurve(
-            to: CGPoint(x: maxWeight - diff, y: maxHeight),
-            control: CGPoint(x: maxWeight, y: maxHeight)
+            to: CGPoint(x: calculatedWidth, y: minHeight + diff),
+            control: CGPoint(x: calculatedWidth, y: minHeight)
         )
         
-        path.addLine(to: CGPoint(x: minWeight + diff, y: maxHeight))
+        path.addLine(to: CGPoint(x: calculatedWidth, y: calculatedHeight - diff))
         path.addQuadCurve(
-            to: CGPoint(x: minWeight, y: maxHeight - diff),
-            control: CGPoint(x: minWeight, y: maxHeight)
+            to: CGPoint(x: calculatedWidth - diff, y: calculatedHeight),
+            control: CGPoint(x: calculatedWidth, y: calculatedHeight)
+        )
+        
+        path.addLine(to: CGPoint(x: minWeight + diff, y: calculatedHeight))
+        path.addQuadCurve(
+            to: CGPoint(x: minWeight, y: calculatedHeight - diff),
+            control: CGPoint(x: minWeight, y: calculatedHeight)
         )
         
         return path
@@ -171,14 +180,14 @@ struct Button: Shape, Identifiable {
     let offsetX: Double
     let offsetY: Double
     
-    var offsetDiff: Double
+    var animatableData: Double
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
         path.addRoundedRect(
             in: CGRect(
-                x: offsetX * 0.982,
+                x: offsetX * 0.982 - animatableData,
                 y: offsetY * 0.2,
                 width: width * 0.03,
                 height: height * 0.1

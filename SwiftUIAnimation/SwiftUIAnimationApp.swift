@@ -13,7 +13,7 @@ struct SwiftUIAnimationApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            NewMainView()
         }
     }
 }

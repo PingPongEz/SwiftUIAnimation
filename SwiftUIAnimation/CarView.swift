@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//Тут просто машинка
+
 struct CarView: View {
     
     var body: some View {

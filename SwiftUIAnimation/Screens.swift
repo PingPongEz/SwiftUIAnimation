@@ -8,6 +8,42 @@
 import Foundation
 import SwiftUI
 
+/*Первые попыточки получилось некрасиво и нереюзабельно
+Оставлю это здесь просто для резюме чтобы было понятно что я не безнадежен
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 struct IPhoneViewBorder: View {
     
     @Binding var timerStarted: Bool
