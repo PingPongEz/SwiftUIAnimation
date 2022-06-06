@@ -28,12 +28,12 @@ struct NewMainView: View {
             let height = geo.size.height
             ScrollView {
                 LoadingView(offsetDiff: $offsetDiff, isLoadingOn: $isLoadingOn, opacityOfLoadingBar: $opacityOfLoadingBar, startAngle: $startAngle, endAngle: $endAngle)
-                    .frame(width: width / 2, height: height / 2)
+                    .frame(width: width / 1.5, height: height / 1.5)
                 
                 BouncingCirclesView(geoWidth: width, geoHeight: height, offsetOfAnotherButton: $offsetOfAnotherButton, isCirclesOn: $isCirclesOn, isSecondScreenOn: $isSecondScreenOn, currentCircle: $currentCircle, opacityOfCircles: $opacityOfCircles)
-                    .frame(width: width / 2, height: height / 2)
+                    .frame(width: width / 1.5, height: height / 1.5)
             }
-            .frame(width: width)
+            .frame(width: width, height: height)
         }
     }
 }
