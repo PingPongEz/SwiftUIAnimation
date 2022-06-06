@@ -58,7 +58,7 @@ struct IPhoneViewCircles: View {
             ZStack {
                 IPhoneScreen(maxWeight: width, maxHeight: height)
                 
-                BouncingCircles(currentCircle: $currentCircle, isCirclesOn: $isCirclesOn)
+//                BouncingCircles(currentCircle: $currentCircle, isCirclesOn: $isCirclesOn)
                     .foregroundColor(.white)
             }
         }
