@@ -29,7 +29,7 @@ struct FirstPathShape: View {
                     path.addLine(to: CGPoint(x: minimal, y: maximal))
                 }
                 .opacity(0.4)
-                .position(x: width / 2, y: height / 2)
+//                .position(x: width / 2, y: height / 2)
             
                 
                 Path { path in

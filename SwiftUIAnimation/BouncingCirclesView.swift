@@ -9,9 +9,6 @@ import SwiftUI
 
 struct BouncingCirclesView: View {
     
-    let geoWidth: Double
-    let geoHeight: Double
-    
     @Binding var offsetOfAnotherButton: Double
     @Binding var isCirclesOn: Bool
     @Binding var isSecondScreenOn: Bool
@@ -94,6 +91,6 @@ struct BouncingCirclesView: View {
 
 struct BouncingCirclesView_Previews: PreviewProvider {
     static var previews: some View {
-        BouncingCirclesView(geoWidth: 200, geoHeight: 450, offsetOfAnotherButton: .constant(0.0), isCirclesOn: .constant(false), isSecondScreenOn: .constant(false), currentCircle: .constant(0), opacityOfCircles: .constant(0.0))
+        BouncingCirclesView(offsetOfAnotherButton: .constant(0.0), isCirclesOn: .constant(false), isSecondScreenOn: .constant(false), currentCircle: .constant(0), opacityOfCircles: .constant(0.0))
     }
 }

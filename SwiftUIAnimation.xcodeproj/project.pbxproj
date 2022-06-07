@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09098F50284F705900A94335 /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09098F4F284F705900A94335 /* ViewManager.swift */; };
+		09098F52284FC4F800A94335 /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09098F51284FC4F800A94335 /* ViewBuilder.swift */; };
+		09098F54284FDDA600A94335 /* ImportedGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09098F53284FDDA600A94335 /* ImportedGrid.swift */; };
 		09ECB5B9284E809000016C4A /* CustomGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECB5B8284E809000016C4A /* CustomGrid.swift */; };
 		09ECB5BB284E87AB00016C4A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECB5BA284E87AB00016C4A /* LoadingView.swift */; };
 		09ECB5BD284E880D00016C4A /* BouncingCirclesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECB5BC284E880D00016C4A /* BouncingCirclesView.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09098F4F284F705900A94335 /* ViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
+		09098F51284FC4F800A94335 /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
+		09098F53284FDDA600A94335 /* ImportedGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedGrid.swift; sourceTree = "<group>"; };
 		09ECB5B8284E809000016C4A /* CustomGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGrid.swift; sourceTree = "<group>"; };
 		09ECB5BA284E87AB00016C4A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		09ECB5BC284E880D00016C4A /* BouncingCirclesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncingCirclesView.swift; sourceTree = "<group>"; };
@@ -63,7 +69,6 @@
 		09FEBE1C284673E900A8D47D = {
 			isa = PBXGroup;
 			children = (
-				09ECB5B8284E809000016C4A /* CustomGrid.swift */,
 				09FEBE27284673E900A8D47D /* SwiftUIAnimation */,
 				09FEBE26284673E900A8D47D /* Products */,
 			);
@@ -80,7 +85,11 @@
 		09FEBE27284673E900A8D47D /* SwiftUIAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				09ECB5B8284E809000016C4A /* CustomGrid.swift */,
+				09098F51284FC4F800A94335 /* ViewBuilder.swift */,
+				09098F4F284F705900A94335 /* ViewManager.swift */,
 				09FEBE28284673E900A8D47D /* SwiftUIAnimationApp.swift */,
+				09098F53284FDDA600A94335 /* ImportedGrid.swift */,
 				09FEBE3D2847505500A8D47D /* IPhoneView.swift */,
 				09EF952B284B722000262D82 /* Shapes.swift */,
 				09EF9535284D285300262D82 /* NewMainView.swift */,
@@ -181,14 +190,17 @@
 			files = (
 				09FEBE35284673EB00A8D47D /* SwiftUIAnimation.xcdatamodeld in Sources */,
 				09EF952E284B72AA00262D82 /* Extensions.swift in Sources */,
+				09098F52284FC4F800A94335 /* ViewBuilder.swift in Sources */,
 				09EF9530284B978A00262D82 /* BouncingCircles.swift in Sources */,
 				09EF952A2848CDF600262D82 /* MainView.swift in Sources */,
 				09EF9534284BAB8400262D82 /* Modifiers.swift in Sources */,
 				09EF9536284D285300262D82 /* NewMainView.swift in Sources */,
 				09FEBE3C28468BB200A8D47D /* CarView.swift in Sources */,
 				09EF952C284B722000262D82 /* Shapes.swift in Sources */,
+				09098F54284FDDA600A94335 /* ImportedGrid.swift in Sources */,
 				09ECB5BB284E87AB00016C4A /* LoadingView.swift in Sources */,
 				09ECB5BD284E880D00016C4A /* BouncingCirclesView.swift in Sources */,
+				09098F50284F705900A94335 /* ViewManager.swift in Sources */,
 				09FEBE3E2847505500A8D47D /* IPhoneView.swift in Sources */,
 				09FEBE32284673EB00A8D47D /* Persistence.swift in Sources */,
 				09ECB5B9284E809000016C4A /* CustomGrid.swift in Sources */,
